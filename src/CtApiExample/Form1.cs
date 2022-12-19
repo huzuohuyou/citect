@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citect;
 using CsvHelper;
 using CtApiExample.CtAPI;
 
@@ -533,6 +534,11 @@ namespace CtApiExample
         {
             try
             {
+                var ctApi = new CtApi();
+                ctApi.Open("172.26.176.60", "HLT2", "HLT2");
+                Console.WriteLine("connected");
+                ctApi.Close();
+
                 OpenConnection(txtIp.Text, txtUser.Text, txtPwd.Text);
             }
             catch (Exception exception)

@@ -64,11 +64,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -365,7 +365,7 @@
             this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(100, 20);
             this.txtPwd.TabIndex = 5;
-            this.txtPwd.Text = "admin";
+            this.txtPwd.Text = "HLT2";
             // 
             // label6
             // 
@@ -382,7 +382,7 @@
             this.txtIp.Name = "txtIp";
             this.txtIp.Size = new System.Drawing.Size(249, 20);
             this.txtIp.TabIndex = 3;
-            this.txtIp.Text = "10.10.1.225";
+            this.txtIp.Text = "172.26.176.60";
             // 
             // txtUser
             // 
@@ -390,7 +390,7 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(100, 20);
             this.txtUser.TabIndex = 2;
-            this.txtUser.Text = "admin";
+            this.txtUser.Text = "HLT2";
             // 
             // label4
             // 
@@ -423,6 +423,16 @@
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Alarms";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(135, 49);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(123, 23);
+            this.button6.TabIndex = 10;
+            this.button6.Text = "GetLashError";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -464,16 +474,6 @@
             this.button1.Text = "Timer Start";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(135, 49);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(123, 23);
-            this.button6.TabIndex = 10;
-            this.button6.Text = "GetLashError";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Form1
             // 
