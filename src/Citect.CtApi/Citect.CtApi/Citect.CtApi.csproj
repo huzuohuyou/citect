@@ -9,9 +9,15 @@
     <Description>Citect SCADA CtApi .NET</Description>
     <Version>1.7.0</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\gestrade\Source\Repos\citect\Citect.CtApi\Citect.CtApi\Citect.CtApi.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <DocumentationFile>C:\Users\gestrade\Source\Repos\citect\Citect.CtApi\Citect.CtApi\Citect.CtApi.xml</DocumentationFile>
   </PropertyGroup>
 
@@ -32,6 +38,24 @@
 
   <ItemGroup>
     <None Update="Citect.CtApi.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CtApi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CtEng32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CtRes32.DLL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CtUtil32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CtUtilManagedHelper.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules.Platform.Citect.CtApi.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

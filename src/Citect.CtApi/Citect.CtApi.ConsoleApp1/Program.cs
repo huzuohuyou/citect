@@ -9,7 +9,7 @@ namespace ConsoleApp1
         {
             try
             {
-                var ctApi = new CtApi();
+                var ctApi = new CtApi(true,"172.26.176.60","HLT2", "HLT2");
                 ctApi.Open();
                 Console.WriteLine("connected");
                 ctApi.Close();

@@ -164,9 +164,25 @@ namespace Citect
         /// <param name="sPassword">Your password as defined in the Citect SCADA project running on the computer you want to connect to. This argument is only necessary if you are calling this function from a remote computer. You need to use a non-blank password. On a local computer, it is optional.</param>
         /// <param name="nMode">The mode of the Cicode call. Set this to 0 (zero).</param>
         /// <returns>If the function succeeds, the return value specifies a handle. If the function does not succeed, the return value is NULL. Use GetLastError() to get extended error information.</returns>
-        [DllImport("CtApi.dll", EntryPoint = "ctOpen", SetLastError = true)]
-        private static extern IntPtr CtOpen(string sComputer, string sUser, string sPassword, uint nMode);
+        //[DllImport("CtApi.dll", EntryPoint = "ctOpen", SetLastError = true)]
+        //private static extern IntPtr CtOpen(string sComputer, string sUser, string sPassword, uint nMode);
+        [Flags]
+        public enum CT_OPEN
+        {
+            /// <summary>use encryption</summary>
+            CRYPT = 0x00000001,
+            /// <summary>reconnect on failure</summary>
+            RECONNECT = 0x00000002,
+            /// <summary>read only mode</summary>
+            READ_ONLY = 0x00000004,
+            /// <summary>batch mode</summary>
+            BATCH = 0x00000008,
+            /// <summary>no license check</summary>
+            NO_LICENSE = unchecked((int)0x80000000),
+        }
 
+        [DllImport("CTAPI.DLL", EntryPoint = "ctOpen", SetLastError = true, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        public static extern Int32 CtOpen(string computer, string user, string password, CT_OPEN flags);
         /// <summary>
         /// Allows a CTAPI consumer to specify from where it will load certain CTAPI dependencies (.NET managed dependencies).
         /// </summary>
@@ -635,7 +651,7 @@ namespace Citect
         /// <exception cref="Win32Exception"></exception>
         public void Open(string computer, string user, string password)
         {
-            SetManagedBinDirectory();
+            //SetManagedBinDirectory();
 
             if (_ctapi != IntPtr.Zero)
             {
@@ -643,7 +659,8 @@ namespace Citect
             }
 
             _logger?.LogInformation($"Citect.CtApi > Open, computer={computer}, user={user}");
-            _ctapi = CtOpen(computer, user, password, 0);
+            //_ctapi = CtOpen(computer, user, password, CT_OPEN.RECONNECT);
+            var a=CtOpen(computer, user, password, CT_OPEN.RECONNECT);
 
             if (_ctapi == IntPtr.Zero)
             {
@@ -660,7 +677,7 @@ namespace Citect
         {
             try
             {
-                var path = @"C:\ProgramData\CitectCtApi";
+                var path = @"C:\Repos\citect\Citect.CtApi\Citect.CtApi\Libs";
 
                 _logger?.LogInformation($"Citect.CtApi > SetManagedBinDirectory, path={path}");
                 var result = CtSetManagedBinDirectory(path);
