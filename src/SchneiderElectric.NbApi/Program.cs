@@ -25,6 +25,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapEquipmentEndpoints();
 
 app.Run();
