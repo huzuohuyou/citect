@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CtApiExample.CtAPI;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +26,8 @@ namespace SchneiderElectric.NbApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Alarm>>> GetAlarms()
         {
-          if (_context.Alarms == null)
+            var _citectHandle = CtApiNativeMethods.Open("172.26.176.60", "HLT2", "HLT2", CT_OPEN.RECONNECT);
+            if (_context.Alarms == null)
           {
               return NotFound();
           }

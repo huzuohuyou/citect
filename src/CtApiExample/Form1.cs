@@ -3,14 +3,18 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 using Citect;
 using CsvHelper;
 using CtApiExample.CtAPI;
@@ -137,7 +141,7 @@ namespace CtApiExample
         /// <summary>
         /// Gets the device list
         /// </summary>
-        private Collection<string> GetDevices()
+        public Collection<string> GetDevices()
         {
             var devices = new Collection<string>();
             int objectHandle;
@@ -640,6 +644,23 @@ namespace CtApiExample
         private void button6_Click(object sender, EventArgs e)
         {
             CtApiStaticMethods.ThrowLastCtapiError("FindFirst");
+        }
+
+        /// <summary>
+        /// file:///C:/Program%20Files%20(x86)/Schneider%20Electric/Power%20Operation/v2021/bin/Help/SCADA%20Help/Default.htm#ctFindFirstEx.html
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void button7_Click(object sender, EventArgs e)
+        {
+            var ctApi = new CtApi();
+            ctApi.Open("172.26.176.171", "HLT2", "HLT2");
+            var CLUSTER = await ctApi.FindAsync("CLUSTER", "*", "", new[] { "NAME" });
+            var Equip = await ctApi.FindAsync("Equip", "*", "", new[] { "NAME", "CLUSTER", "Comment" });
+            var TREND = await ctApi.FindAsync("TREND", "*", "", new[] { "Cluster", "Equipment", "Tag", "EngUnits", "Item", "Comment", "Expression", "SamplePer" });
+            var ALARM = await ctApi.FindAsync("ALARM", "*", "", new[] { "Cluster", "Equipment", "Tag", "Name", "Category", "Priority", "AlarmType", "AlmComment" });
+            var Accum = await ctApi.FindAsync("Accum", "*", "", new[] { "EQUIPMENT", "PRIV", "AREA", "CLUSTER", "NAME", "TRIGGER", "VALUE", "RUNNING", "STARTS", "TOTALISER" });
+            var TAG = await ctApi.FindAsync("TAG", "*", "", new[] { "Cluster", "Equipment", "Tag", "Comment", "EngUnits", "Item" });
         }
     }
 }
